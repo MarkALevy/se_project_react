@@ -1,0 +1,50 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__title {
+  margin: 0;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+.modal__content {
+  max-width: 496px;
+  background-color: #fff;
+  position: relative;
+  padding: 28px 28px 36px;
+  width: 100%;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  widt: 100%;
+}
+
+.modal__input {
+  display: block;
+}
+
+.modal__radio-buttons {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 0;
+}
