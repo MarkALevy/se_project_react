@@ -1,0 +1,20 @@
+.modal__content_type_image {
+  padding: 0;
+  overflow: hidden;
+  max-width: 498px;
+}
+.modal__image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.modal__footer {
+  padding: 20px 0 32px 32px;
+}
+
+.modal__caption,
+.modal__weather {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
