@@ -21,7 +21,7 @@
   font-weight: 700;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
@@ -97,9 +97,6 @@
   accent-color: rgba(0, 0, 0, 1);
 }
 
-.modal__radio-input__selected {
-  color: rgba(0, 0, 0, 1);
-}
 .modal__submit {
   background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
