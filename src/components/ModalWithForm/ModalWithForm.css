@@ -11,6 +11,8 @@
   visibility: hidden;
   font-size: 16px;
   font-weight: 700;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .modal__title {
@@ -21,6 +23,8 @@
 
 .modal__opened {
   visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .modal__close {

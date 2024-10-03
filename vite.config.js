@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  favicon: "./favicon.svg",
+  favicon: "./favicon.png",
 });

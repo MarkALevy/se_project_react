@@ -20,6 +20,7 @@
   font-weight: 700;
   border-style: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .header__user-container {
