@@ -13,6 +13,7 @@
   font-weight: 700;
   opacity: 0;
   transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  z-index: 2;
 }
 
 .modal__title {
@@ -84,6 +85,10 @@
   margin: 4px 0;
   color: rgba(0, 0, 0, 0.5);
   flex-direction: row;
+}
+
+.modal__label_type_radio-selected {
+  color: rgba(0, 0, 0, 1);
 }
 
 .modal__radio-input {
