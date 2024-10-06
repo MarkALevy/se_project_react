@@ -7,11 +7,16 @@
 
 .toggle-switch__box {
   border-radius: 20px;
-  border: 2px solid #000;
+  border: 2px solid rgba(0, 0, 0, 0.5);
   width: 56px;
   height: 28px;
   appearance: none;
   cursor: pointer;
+  z-index: 1;
+}
+
+.toggle-switch__box:hover {
+  border-color: rgba(0, 0, 0, 1);
 }
 
 .toggle-switch__slider {
@@ -52,6 +57,7 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
 }
+
 .toggle-switch__active {
   font-size: 14px;
   font-weight: 700;

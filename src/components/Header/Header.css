@@ -32,4 +32,9 @@
 
 .header__user-name {
   margin: 0;
+  color: #000;
+}
+
+.header__profile-link {
+  text-decoration: none;
 }

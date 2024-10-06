@@ -4,7 +4,6 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
-  console.log(currentTemperatureUnit);
   const temp = weatherData.temp[currentTemperatureUnit];
   const unit = currentTemperatureUnit;
 
