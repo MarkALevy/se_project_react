@@ -53,7 +53,11 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Main
+            weatherData={weatherData}
+            handleCardClick={handleCardClick}
+            currentTemperatureUnit={currentTemperatureUnit}
+          />
           <Footer />
         </div>
         <ModalWithForm

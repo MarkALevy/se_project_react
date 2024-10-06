@@ -3,13 +3,21 @@ import { defaultClothingItems } from "../../utils/constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
+  console.log(currentTemperatureUnit);
+  const temp = weatherData.temp[currentTemperatureUnit];
+  const unit = currentTemperatureUnit;
+
   return (
     <main>
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard
+        weatherData={weatherData}
+        currentTemperatureUnit={currentTemperatureUnit}
+      />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp.F}&deg; F / You may want to wear:
+          Today is {temp}
+          &deg; {unit} / You may want to wear:
         </p>
         <ul className="cards__list">
           {defaultClothingItems

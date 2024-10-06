@@ -36,14 +36,12 @@
   position: absolute;
   top: -7px;
   left: 38px;
-  color: #fff;
 }
 
 .toggle-switch__temp-C {
   position: absolute;
   top: -7px;
   right: 38px;
-  color: #fff;
 }
 .toggle-switch__active {
   font-size: 14px;
