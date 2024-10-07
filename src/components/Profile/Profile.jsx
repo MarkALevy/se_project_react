@@ -1,8 +1,8 @@
 import avatar from "../../assets/Avatar.png";
-import { defaultClothingItems } from "../../utils/constants";
+// import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import "./Profile.css";
-function Profile({ handleCardClick, handleAddClick }) {
+function Profile({ handleCardClick, handleAddClick, clothingItems }) {
   return (
     <section className="profile">
       <div className="profile__user-container">
@@ -22,7 +22,7 @@ function Profile({ handleCardClick, handleAddClick }) {
         </p>
 
         <ul className="cards__list">
-          {defaultClothingItems.map((item) => {
+          {clothingItems.map((item) => {
             return (
               <ItemCard
                 key={item._id}

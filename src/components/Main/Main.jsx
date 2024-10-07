@@ -1,9 +1,14 @@
 import "./Main.css";
-import { defaultClothingItems } from "../../utils/constants";
+// import { defaultClothingItems } from "../../utils/constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
-function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  currentTemperatureUnit,
+  clothingItems,
+}) {
   const temp = weatherData.temp[currentTemperatureUnit];
   const unit = currentTemperatureUnit;
 
@@ -19,7 +24,7 @@ function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
           &deg; {unit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
+          {clothingItems
             .filter((item) => {
               return item.weather === weatherData.type;
             })

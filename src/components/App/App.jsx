@@ -1,6 +1,7 @@
 import { coordinates, APIkey } from "../../utils/constants";
-import { act, useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -12,6 +13,7 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -36,17 +38,31 @@ function App() {
     setActiveModal("");
   };
 
-  const onAddItem = (values) => {
-    console.log(values); //for now
+  const onAddItem = (item) => {
+    addItem(item)
+      .then((item) => setClothingItems([item, ...clothingItems]))
+      .catch((err) => {
+        console.error("Failed to add clothing item", err);
+      });
+    closeActiveModal();
   };
 
-  const openConfirmationModal = (card) => {
+  const openConfirmationModal = () => {
     setActiveModal("delete");
-    setSelectedCard(card);
   };
 
   const handleCardDelete = (card) => {
-    console.log(card);
+    deleteItem(card)
+      .then(
+        setClothingItems(
+          clothingItems.filter((item) => {
+            return item !== card;
+          })
+        )
+      )
+      .catch((err) => {
+        console.error("Failed to delete clothing item", err);
+      });
   };
 
   const handleToggleSwitchChange = () => {
@@ -61,6 +77,18 @@ function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
+  }, []);
+
+  const [clothingItems, setClothingItems] = useState([]);
+
+  useEffect(() => {
+    getItems()
+      .then((items) => {
+        setClothingItems(items.reverse());
+      })
+      .catch((err) => {
+        console.error("Failed to receive clothing items", err);
+      });
   }, []);
 
   return (
@@ -78,6 +106,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   currentTemperatureUnit={currentTemperatureUnit}
+                  clothingItems={clothingItems}
                 />
               }
             />
@@ -87,6 +116,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   handleAddClick={handleAddClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
@@ -120,5 +150,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

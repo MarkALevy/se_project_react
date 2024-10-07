@@ -1,9 +1,9 @@
 import "./ItemModal.css";
 function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
-  const handleDeleteClick = (card) => {
-    setActiveModal("delete");
-    setSelectedCard(card);
-  };
+  // const handleDeleteClick = (card) => {
+  //   setActiveModal("delete");
+  //   setSelectedCard(card);
+  // };
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -13,7 +13,7 @@ function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
           type="button"
           className="modal__close"
         ></button>
-        <img src={card.link} alt={card.name} className="modal__image" />
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">
           <div className="modal__info">
             <h2 className="modal__caption">{card.name}</h2>
@@ -22,7 +22,7 @@ function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
           <button
             type="button"
             className="modal__delete"
-            onClick={openConfirmationModal(card)}
+            onClick={openConfirmationModal}
           >
             Delete item
           </button>

@@ -3,6 +3,7 @@ function ConfirmationModal({ card, onClose, isOpen, handleCardDelete }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleCardDelete(card);
+    onClose();
   };
 
   return (
@@ -13,13 +14,13 @@ function ConfirmationModal({ card, onClose, isOpen, handleCardDelete }) {
           type="button"
           className="modal__close"
         ></button>
-        <h2 class="modal__caption">
+        <h2 className="modal__caption">
           Are you sure you want to delete this item?
           <br />
           This action is irreversible.
         </h2>
         <form
-          class="modal__form"
+          className="modal__form"
           id="delete-form"
           name="delete-form"
           onSubmit={handleSubmit}
@@ -27,7 +28,7 @@ function ConfirmationModal({ card, onClose, isOpen, handleCardDelete }) {
           <button
             type="submit"
             id="confirm-delete"
-            class="modal__confirm"
+            className="modal__confirm"
             aria-label="confirm delete"
           >
             Yes, delete item
@@ -35,7 +36,7 @@ function ConfirmationModal({ card, onClose, isOpen, handleCardDelete }) {
           <button
             type="button"
             id="cancel"
-            class="modal__cancel"
+            className="modal__cancel"
             aria-label="Cancel"
             onClick={onClose}
           >

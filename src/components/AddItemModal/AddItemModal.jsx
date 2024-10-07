@@ -5,9 +5,10 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-  const [url, setUrl] = useState("");
+  const [link, setLink] = useState("");
+
   const handleUrlChange = (e) => {
-    setUrl(e.target.value);
+    setLink(e.target.value);
   };
 
   const [weatherType, setWeatherType] = useState("");
@@ -16,7 +17,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, url, weatherType });
+    onAddItem({ name, link, weatherType });
   };
   return (
     <ModalWithForm
@@ -35,6 +36,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
           name="name"
           placeholder="Name"
           onChange={handleNameChange}
+          required
         />
       </label>
       <label htmlFor="imageURL" className="modal__label">
@@ -46,6 +48,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
           name="link"
           placeholder="Image URL"
           onChange={handleUrlChange}
+          required
         />
       </label>
       <fieldset className="modal__radio-buttons" onChange={handleRadioBtnCheck}>
@@ -61,6 +64,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
             className="modal__radio-input"
             name="radio-btn"
             id="hot"
+            required
           />
           Hot
         </label>
