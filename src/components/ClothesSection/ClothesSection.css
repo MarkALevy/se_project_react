@@ -1,0 +1,14 @@
+.clothes-section__text {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 39px;
+}
+
+.clothes-section__add-clothes-btn {
+  border-style: none;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 20px;
+  cursor: pointer;
+}
