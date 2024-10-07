@@ -3,7 +3,6 @@ function ConfirmationModal({ card, onClose, isOpen, handleCardDelete }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleCardDelete(card);
-    onClose();
   };
 
   return (

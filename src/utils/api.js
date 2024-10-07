@@ -7,18 +7,18 @@ function _handleRes(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-function _request(url, options) {
+export function request(url, options) {
   return fetch(url, options).then(_handleRes);
 }
 
 export function getItems() {
-  return _request(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     headers: headers,
   });
 }
 
 export function addItem({ name, link, weatherType }) {
-  return _request(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
@@ -32,7 +32,7 @@ export function addItem({ name, link, weatherType }) {
 }
 
 export function deleteItem(card) {
-  return _request(`${baseUrl}/items/${card._id}`, {
+  return request(`${baseUrl}/items/${card._id}`, {
     method: "DELETE",
     headers: headers,
   });

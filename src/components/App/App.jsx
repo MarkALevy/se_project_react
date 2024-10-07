@@ -1,12 +1,12 @@
 import { coordinates, APIkey } from "../../utils/constants";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
-// import ModalWithForm from "../ModalWithForm/ModalWithForm";
+
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
@@ -40,11 +40,13 @@ function App() {
 
   const onAddItem = (item) => {
     addItem(item)
-      .then((item) => setClothingItems([item, ...clothingItems]))
+      .then((item) => {
+        setClothingItems([item, ...clothingItems]);
+        closeActiveModal();
+      })
       .catch((err) => {
         console.error("Failed to add clothing item", err);
       });
-    closeActiveModal();
   };
 
   const openConfirmationModal = () => {
@@ -53,13 +55,14 @@ function App() {
 
   const handleCardDelete = (card) => {
     deleteItem(card)
-      .then(
+      .then(() => {
         setClothingItems(
           clothingItems.filter((item) => {
             return item !== card;
           })
-        )
-      )
+        );
+        closeActiveModal();
+      })
       .catch((err) => {
         console.error("Failed to delete clothing item", err);
       });
@@ -105,7 +108,6 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
-                  currentTemperatureUnit={currentTemperatureUnit}
                   clothingItems={clothingItems}
                 />
               }

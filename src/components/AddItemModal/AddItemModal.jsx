@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function AddItemModal({ onClose, onAddItem, isOpen }) {
   const [name, setName] = useState("");
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -36,6 +37,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
           name="name"
           placeholder="Name"
           onChange={handleNameChange}
+          value={name}
           required
         />
       </label>
@@ -48,6 +50,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
           name="link"
           placeholder="Image URL"
           onChange={handleUrlChange}
+          value={link}
           required
         />
       </label>

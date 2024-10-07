@@ -1,10 +1,5 @@
 import "./ItemModal.css";
 function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
-  // const handleDeleteClick = (card) => {
-  //   setActiveModal("delete");
-  //   setSelectedCard(card);
-  // };
-
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
