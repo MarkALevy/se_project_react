@@ -11,6 +11,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -37,6 +38,15 @@ function App() {
 
   const onAddItem = (values) => {
     console.log(values); //for now
+  };
+
+  const openConfirmationModal = (card) => {
+    setActiveModal("delete");
+    setSelectedCard(card);
+  };
+
+  const handleCardDelete = (card) => {
+    console.log(card);
   };
 
   const handleToggleSwitchChange = () => {
@@ -95,6 +105,15 @@ function App() {
             isOpen={activeModal === "preview"}
             card={selectedCard}
             onClose={closeActiveModal}
+            openConfirmationModal={openConfirmationModal}
+          />
+        )}
+        {activeModal === "delete" && (
+          <ConfirmationModal
+            isOpen={activeModal === "delete"}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            handleCardDelete={handleCardDelete}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>
