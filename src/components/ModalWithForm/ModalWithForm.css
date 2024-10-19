@@ -103,6 +103,20 @@
   accent-color: rgba(0, 0, 0, 1);
 }
 
+.modal__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: start;
+  padding: 0;
+}
+
+.modal__or-button {
+  background-color: transparent;
+  border-style: none;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
 .modal__submit {
   background-color: rgba(0, 0, 0, 1);
   color: #fff;

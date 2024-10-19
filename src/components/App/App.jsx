@@ -1,6 +1,6 @@
 import { coordinates, APIkey } from "../../utils/constants";
 import { React, useEffect, useState, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -9,6 +9,8 @@ import Profile from "../Profile/Profile";
 
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -24,6 +26,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -122,6 +125,34 @@ function App() {
                 />
               }
             />
+            <Route
+              path="*"
+              element={
+                isLoggedIn ? (
+                  <Navigate to="/profile" replace />
+                ) : (
+                  <Navigate to="/signin" replace />
+                )
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <RegisterModal
+                  isOpen={activeModal === "signUp"}
+                  onClose={closeActiveModal}
+                />
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <LoginModal
+                  isOpen={activeModal === "login"}
+                  onClose={closeActiveModal}
+                />
+              }
+            />
           </Routes>
           <Footer />
         </div>
@@ -148,6 +179,18 @@ function App() {
             handleCardDelete={handleCardDelete}
           />
         )}
+        {/* {activeModal === "login" && (
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onClose={closeActiveModal}
+          />
+        )}
+        {activeModal === "signUp" && (
+          <RegisterModal
+            isOpen={activeModal === "signUp"}
+            onClose={closeActiveModal}
+          />
+        )} */}
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
