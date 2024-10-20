@@ -25,7 +25,7 @@ function RegisterModal({ onClose, isOpen, onSubmit, handleLoginClick }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(email, password, name, link);
+    onSubmit({ email, password, name, avatar: link });
   };
 
   const handleClickOr = (e) => {

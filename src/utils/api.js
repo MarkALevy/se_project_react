@@ -17,10 +17,13 @@ export function getItems() {
   });
 }
 
-export function addItem({ name, link, weatherType }) {
+export function addItem({ name, link, weatherType }, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name: name,
       imageUrl: link,
@@ -31,9 +34,12 @@ export function addItem({ name, link, weatherType }) {
   });
 }
 
-export function deleteItem(card) {
+export function deleteItem(card, token) {
   return request(`${baseUrl}/items/${card._id}`, {
     method: "DELETE",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }

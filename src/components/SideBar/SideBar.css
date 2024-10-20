@@ -11,6 +11,20 @@
   margin-right: 16px;
 }
 
+.sidebar__placeholder {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+  z-index: 5;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
 .sidebar__user-name {
   font-size: 20px;
   font-weight: 700;

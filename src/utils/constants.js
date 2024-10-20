@@ -78,7 +78,6 @@ export const coordinates = {
 };
 
 export const APIkey = "130f0b6a4fadc2899b6d71c8934be8e1";
-
 export const baseUrl = "http://localhost:3001";
 export const headers = {
   "Content-Type": "application/json",
