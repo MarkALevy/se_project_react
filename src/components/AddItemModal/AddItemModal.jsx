@@ -28,6 +28,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       orText=""
+      orBtnIsDisabled={true}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}

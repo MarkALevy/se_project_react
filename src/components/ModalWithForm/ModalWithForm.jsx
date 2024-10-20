@@ -8,6 +8,7 @@ function ModalWithForm({
   onSubmit,
   orText,
   onClickOr,
+  orBtnIsDisabled,
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -23,6 +24,7 @@ function ModalWithForm({
             <button
               type="button"
               onClick={onClickOr}
+              disabled={orBtnIsDisabled}
               className="modal__or-button"
             >
               {orText}

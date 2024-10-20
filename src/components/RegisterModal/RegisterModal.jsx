@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ onClose, isOpen }) {
+function RegisterModal({ onClose, isOpen, onSubmit, handleLoginClick }) {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -22,16 +23,15 @@ function RegisterModal({ onClose, isOpen }) {
     setLink(e.target.value);
   };
 
-  const handleClickOr = (e) => {
-    e.preventDefault();
-    console.log(e);
-    ///TODO
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    ///TODO
+    onSubmit(email, password, name, link);
+  };
+
+  const handleClickOr = (e) => {
+    e.preventDefault();
+    onClose();
+    handleLoginClick();
   };
 
   return (
@@ -43,6 +43,7 @@ function RegisterModal({ onClose, isOpen }) {
       onSubmit={handleSubmit}
       orText="or Log in"
       onClickOr={handleClickOr}
+      orBtnIsDisabled={false}
     >
       <label htmlFor="email" className="modal__label">
         Email*

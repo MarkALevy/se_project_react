@@ -23,6 +23,31 @@
   background-color: transparent;
   cursor: pointer;
 }
+.header__logged-in {
+  display: flex;
+  padding: 0;
+}
+
+.header__logged-out {
+  display: flex;
+  padding: 0;
+}
+
+.header__register-btn {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.header__login-btn {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 20px;
+}
 
 .header__user-container {
   display: flex;
