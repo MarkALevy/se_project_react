@@ -33,6 +33,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
+    _id: "",
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,7 +46,7 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
-        setCurrentUser({ name: res.name, avatar: res.avatar });
+        setCurrentUser({ name: res.name, avatar: res.avatar, _id: res._id });
         closeActiveModal();
       })
       .catch(console.error);
@@ -60,7 +61,7 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
-        setCurrentUser({ name: res.name, avatar: res.avatar });
+        setCurrentUser({ name: res.name, avatar: res.avatar, _id: res._id });
 
         navigate("/profile");
         closeActiveModal();
@@ -166,7 +167,11 @@ function App() {
       .checkToken(token)
       .then((res) => {
         setIsLoggedIn(true);
-        setCurrentUser({ name: res.data.name, avatar: res.data.avatar });
+        setCurrentUser({
+          name: res.data.name,
+          avatar: res.data.avatar,
+          _id: res.data._id,
+        });
       })
       .catch(console.error);
   }, []);
