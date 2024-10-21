@@ -59,3 +59,23 @@ export function editUser({ name, link }, token) {
     return data;
   });
 }
+
+export function addCardLike(card, token) {
+  return request(`${baseUrl}/items/${card._id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function removeCardLike(card, token) {
+  return request(`${baseUrl}/items/${card._id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+}

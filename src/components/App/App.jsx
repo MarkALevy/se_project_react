@@ -1,5 +1,5 @@
 import { coordinates, APIkey } from "../../utils/constants";
-import { React, useEffect, useState, useContext } from "react";
+import { React, useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./App.css";
@@ -17,7 +17,14 @@ import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
-import { getItems, addItem, deleteItem, editUser } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  editUser,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import * as auth from "../../utils/auth";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
@@ -135,6 +142,24 @@ function App() {
       });
   };
 
+  const handleCardLike = (card, isLiked) => {
+    !isLiked
+      ? addCardLike(card, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === card._id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.error(err))
+      : removeCardLike(card, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === card._id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.error(err));
+  };
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
@@ -159,7 +184,7 @@ function App() {
       .catch((err) => {
         console.error("Failed to receive clothing items", err);
       });
-  }, []);
+  }, [clothingItems.length]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -201,6 +226,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
