@@ -240,6 +240,7 @@ function App() {
                       handleUpdateClick={handleUpdateClick}
                       onLogout={onLogout}
                       clothingItems={clothingItems}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
