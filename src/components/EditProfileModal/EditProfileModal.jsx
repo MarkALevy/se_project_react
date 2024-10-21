@@ -40,7 +40,7 @@ function EditProfileModal({ onClose, isOpen, onProfileUpdate }) {
           required
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="imageURL" className="modal__label">
         Avatar *
         <input
           type="url"

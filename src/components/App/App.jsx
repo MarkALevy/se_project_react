@@ -38,9 +38,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState(null);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const navigate = useNavigate();
 
   const handleRegistration = ({ email, password, name, avatar }) => {
@@ -52,7 +50,9 @@ function App() {
         setCurrentUser({ name: res.name, avatar: res.avatar, _id: res._id });
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Failed to register", err);
+      });
   };
 
   const handleLogin = ({ email, password }) => {
@@ -69,7 +69,9 @@ function App() {
         navigate("/profile");
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Failed to login", err);
+      });
   };
 
   const token = localStorage.getItem("jwt");
@@ -117,11 +119,14 @@ function App() {
   };
 
   const onProfileUpdate = ({ name, link }) => {
-    editUser({ name, link }, token).then((user) => {
-      setCurrentUser(user);
-      closeActiveModal();
-    });
-    console.log(`profile updated`);
+    editUser({ name, link }, token)
+      .then((user) => {
+        setCurrentUser(user);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Failed to edit profile", err);
+      });
   };
 
   const openConfirmationModal = () => {
@@ -143,22 +148,28 @@ function App() {
       });
   };
 
-  const handleCardLike = (card, isLiked) => {
+  const handleCardLike = (card, isLiked, setIsLiked) => {
     !isLiked
       ? addCardLike(card, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === card._id ? updatedCard : item))
             );
+            setIsLiked(!isLiked);
           })
-          .catch((err) => console.error(err))
+          .catch((err) => {
+            console.error("Failed to like item", err);
+          })
       : removeCardLike(card, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === card._id ? updatedCard : item))
             );
+            setIsLiked(!isLiked);
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            console.error("Failed to unlike item", err);
+          });
   };
 
   const handleToggleSwitchChange = () => {
@@ -172,7 +183,9 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Failed to receive weather data", err);
+      });
   }, []);
 
   const [clothingItems, setClothingItems] = useState([]);
@@ -202,8 +215,23 @@ function App() {
           _id: res.data._id,
         });
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Authorization failed", err);
+      });
   }, []);
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
