@@ -17,7 +17,7 @@ import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import { getItems, addItem, deleteItem, editUser } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
@@ -30,11 +30,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [currentUser, setCurrentUser] = useState({
-    name: "",
-    avatar: "",
-    _id: "",
-  });
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -70,7 +66,6 @@ function App() {
   };
 
   const token = localStorage.getItem("jwt");
-  // localStorage.removeItem("jwt");
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -93,7 +88,7 @@ function App() {
     setActiveModal("login");
   };
 
-  const handleLogoutClick = () => {
+  const onLogout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
   };
@@ -111,6 +106,14 @@ function App() {
       .catch((err) => {
         console.error("Failed to add clothing item", err);
       });
+  };
+
+  const onProfileUpdate = ({ name, link }) => {
+    editUser({ name, link }, token).then((user) => {
+      setCurrentUser(user);
+      closeActiveModal();
+    });
+    console.log(`profile updated`);
   };
 
   const openConfirmationModal = () => {
@@ -209,7 +212,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
                       handleUpdateClick={handleUpdateClick}
-                      handleLogoutClick={handleLogoutClick}
+                      onLogout={onLogout}
                       clothingItems={clothingItems}
                     />
                   </ProtectedRoute>
@@ -273,7 +276,7 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === "editProfile"}
               onClose={closeActiveModal}
-              onSubmit={handleProfileUpdate}
+              onProfileUpdate={onProfileUpdate}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

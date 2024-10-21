@@ -14,8 +14,9 @@ function Header({
   handleRegisterClick,
 }) {
   const currentUser = useContext(CurrentUserContext);
-  const userName = currentUser.name;
-  const avatar = currentUser.avatar;
+
+  const userName = currentUser?.name;
+  const avatar = currentUser?.avatar;
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",

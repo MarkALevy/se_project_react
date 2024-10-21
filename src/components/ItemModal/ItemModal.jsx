@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
-  const { currentUser } = useContext(CurrentUserContext);
-  const isOwn = card.owner === currentUser._id;
-  const itemDeleteButtonClassName = `modal__delete ${
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser?._id;
+  const itemDeleteButtonClassName = `${
     isOwn ? "modal__delete_visible" : "modal__delete_hidden"
   }`;
   return (
@@ -24,7 +24,7 @@ function ItemModal({ isOpen, card, onClose, openConfirmationModal }) {
           </div>
           <button
             type="button"
-            className={itemDeleteButtonClassName}
+            className={`modal__delete ${itemDeleteButtonClassName}`}
             onClick={openConfirmationModal}
             disabled={!isOwn}
           >

@@ -30,6 +30,8 @@
   font-weight: 700;
   color: rgba(255, 77, 0, 1);
   background-color: transparent;
+  margin-left: auto;
+
   cursor: pointer;
 }
 

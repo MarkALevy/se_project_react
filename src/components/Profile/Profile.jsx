@@ -7,13 +7,13 @@ function Profile({
   handleAddClick,
   clothingItems,
   handleUpdateClick,
-  handleLogoutClick,
+  onLogout,
 }) {
   return (
     <section className="profile">
       <SideBar
         handleUpdateClick={handleUpdateClick}
-        handleLogoutClick={handleLogoutClick}
+        onLogout={onLogout}
       />
       <ClothesSection
         handleCardClick={handleCardClick}

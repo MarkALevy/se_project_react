@@ -43,3 +43,19 @@ export function deleteItem(card, token) {
     },
   });
 }
+
+export function editUser({ name, link }, token) {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: name,
+      avatar: link,
+    }),
+  }).then((data) => {
+    return data;
+  });
+}
