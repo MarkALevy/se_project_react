@@ -30,5 +30,9 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  });
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    });
 };

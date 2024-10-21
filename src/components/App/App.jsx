@@ -19,6 +19,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import { getItems, addItem, deleteItem } from "../../utils/api";
 import * as auth from "../../utils/auth";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -60,7 +61,7 @@ function App() {
         setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
         setCurrentUser({ name: res.name, avatar: res.avatar });
-        console.log(res);
+
         navigate("/profile");
         closeActiveModal();
       })
@@ -68,7 +69,7 @@ function App() {
   };
 
   const token = localStorage.getItem("jwt");
-  localStorage.removeItem("jwt");
+  // localStorage.removeItem("jwt");
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -89,6 +90,15 @@ function App() {
 
   const handleLoginClick = () => {
     setActiveModal("login");
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+  };
+
+  const handleUpdateClick = () => {
+    setActiveModal("editProfile");
   };
 
   const onAddItem = (item) => {
@@ -156,7 +166,7 @@ function App() {
       .checkToken(token)
       .then((res) => {
         setIsLoggedIn(true);
-        setCurrentUser({ name: res.name, avatar: res.avatar });
+        setCurrentUser({ name: res.data.name, avatar: res.data.avatar });
       })
       .catch(console.error);
   }, []);
@@ -193,6 +203,8 @@ function App() {
                     <Profile
                       handleCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
+                      handleUpdateClick={handleUpdateClick}
+                      handleLogoutClick={handleLogoutClick}
                       clothingItems={clothingItems}
                     />
                   </ProtectedRoute>
@@ -250,6 +262,13 @@ function App() {
               card={selectedCard}
               onClose={closeActiveModal}
               handleCardDelete={handleCardDelete}
+            />
+          )}
+          {activeModal === "editProfile" && (
+            <EditProfileModal
+              isOpen={activeModal === "editProfile"}
+              onClose={closeActiveModal}
+              onSubmit={handleProfileUpdate}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
