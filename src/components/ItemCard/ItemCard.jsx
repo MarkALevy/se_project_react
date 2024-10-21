@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 function ItemCard({ item, onCardClick, onCardLike }) {
   const [isLiked, setIsLiked] = useState(item.likes.includes(item.owner));
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = item.owner === currentUser?._id;
+
+  const itemLikeButtonClassName = `${
+    isOwn ? "card__like-button" : "card__like-button card__like-button_hidden"
+  }`;
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -20,8 +27,8 @@ function ItemCard({ item, onCardClick, onCardLike }) {
           aria-label="Like"
           className={
             isLiked
-              ? "card__like-button card__like-button_enabled"
-              : "card__like-button"
+              ? `${itemLikeButtonClassName} card__like-button_enabled`
+              : `${itemLikeButtonClassName}`
           }
           onClick={handleLike}
         ></button>

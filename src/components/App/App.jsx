@@ -98,6 +98,7 @@ function App() {
   const onLogout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setCurrentUser(null);
   };
 
   const handleUpdateClick = () => {
@@ -184,7 +185,7 @@ function App() {
       .catch((err) => {
         console.error("Failed to receive clothing items", err);
       });
-  }, [clothingItems.length]);
+  }, [clothingItems.length, currentUser]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
