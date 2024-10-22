@@ -30,7 +30,6 @@ function RegisterModal({ onClose, isOpen, onSubmit, handleLoginClick }) {
 
   const handleClickOr = (e) => {
     e.preventDefault();
-    onClose(); //here I close the modal to toggle between the registration and the login modals. there is no submission or request sent to the server
     handleLoginClick();
   };
 
